@@ -1,5 +1,9 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import '../Style/NavBar.css';
+import Panier from '../Image/panier.png';
+import Search from '../Image/search.png';
+import user from '../Image/user.png'
 
 function NavBar() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -35,86 +39,17 @@ function NavBar() {
           )}
         </li>
         <li><Link to="/" className="nav-item">About</Link></li>
+        </ul>
+        <ul className='nav-list1'>
+        <li><Link to="/Panier" ><img src={Panier} alt='panier' className='Search' /></Link></li>
+        <li><Link to="/Panier"><img src={Search} alt='Search' className='Search'/></Link></li>
+        <li><Link to="/Panier"><img src={user} alt='user'className='Search'/></Link></li>
+       
+      
+
       </ul>
 
-      {/* Style for dropdown */}
-      <style jsx>{`
-        .navbar {
-          font-family: Arial, sans-serif;
-          background-color: #333;
-          padding: 10px;
-        }
-
-        .logo img {
-          width: 50px;
-          height: 50px;
-        }
-
-        .nav-list {
-          list-style-type: none;
-          padding: 0;
-          margin: 0;
-          display: flex;
-          justify-content: space-around;
-        }
-
-        .nav-item {
-          color: white;
-          text-decoration: none;
-          padding: 10px 15px;
-          display: block;
-        }
-
-        .nav-item:hover {
-          background-color: #444;
-          border-radius: 4px;
-        }
-
-        .dropdown {
-          position: relative;
-        }
-
-        .dropdown-menu {
-          position: absolute;
-          top: 100%;
-          left: 0;
-          background-color: #fff;
-          list-style-type: none;
-          padding: 10px;
-          margin: 0;
-          box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-          display: none;
-        }
-
-        .dropdown-menu li {
-          padding: 8px 15px;
-        }
-
-        .dropdown-item {
-          color: #333;
-          text-decoration: none;
-          display: block;
-        }
-
-        .dropdown-item:hover {
-          background-color: #f0f0f0;
-        }
-
-        .dropdown:hover .dropdown-menu {
-          display: block;
-        }
-
-        @media (max-width: 768px) {
-          .nav-list {
-            flex-direction: column;
-            align-items: center;
-          }
-
-          .nav-item {
-            padding: 12px;
-          }
-        }
-      `}</style>
+     
     </div>
   );
 }
