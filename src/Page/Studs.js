@@ -1,15 +1,16 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import { productService } from '../services/api';
-import '../Style/Boutique.css'; // Assuming you might want some styles
-import { FaPlus } from 'react-icons/fa'; // Import a plus icon
-import StarRating from '../components/StarRating'; // Import the StarRating component
-import { useCart } from '../context/CartContext'; // Import useCart hook
+import { FaPlus } from 'react-icons/fa';
+import './BouclesOreilles.css';
+import './Boutique.css';
+import StarRating from '../components/StarRating';
+import { useCart } from '../context/CartContext';
 
-export default function Boutique() {
+export default function Studs() {
   const [produits, setProduits] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const { addToCart } = useCart(); // Get addToCart from context
+  const { addToCart } = useCart();
 
   const IMAGE_BASE_URL = 'http://127.0.0.1:8000/storage/';
 
@@ -20,8 +21,13 @@ export default function Boutique() {
         const productsData = await productService.getAllProducts();
         console.log('API Response:', productsData);
 
+        // Filter products for Studs category
+        const filtered = productsData.filter(
+          (p) => p.category === 'Studs' || p.name.includes('Studs')
+        );
+
         // Transform the data to match the expected format
-        const transformedProducts = productsData.map(product => ({
+        const transformedProducts = filtered.map(product => ({
           id: product.id,
           name: product.name,
           description: product.description,
@@ -36,7 +42,7 @@ export default function Boutique() {
         setProduits(transformedProducts);
         setError(null);
       } catch (err) {
-        console.error("Error fetching products:", err);
+        console.error("Error fetching Chains products:", err);
         setError('Failed to load products. Please try again later.');
         setProduits([]);
       } finally {
@@ -51,7 +57,7 @@ export default function Boutique() {
     return (
       <div className="loading-container">
         <div className="loading-spinner"></div>
-        <p>Loading products...</p>
+        <p>Loading Chains products...</p>
       </div>
     );
   }
@@ -68,17 +74,17 @@ export default function Boutique() {
   }
 
   return (
-    <div className="boutique-container">
-      <h1>Boutique</h1>
+    <div className="boucles-oreilles-container">
+      <h2>Bangles Collection</h2>
       <div className="product-grid">
         {produits.length > 0 ? (
           produits.map((produit) => (
             <div key={produit.id} className="product-card">
-              <div className="product-image-container"> {/* New container */}
+              <div className="product-image-container">
                 {produit.image_url ? (
-                  <img
-                    src={`${IMAGE_BASE_URL}${produit.image_url}`}
-                    alt={produit.name}
+                  <img 
+                    src={`${IMAGE_BASE_URL}${produit.image_url}`} 
+                    alt={produit.name} 
                     className="product-image"
                     onError={(e) => {
                       e.target.onerror = null;
@@ -88,7 +94,6 @@ export default function Boutique() {
                 ) : (
                   <div className="product-no-image">No Image</div>
                 )}
-                {/* Add to Cart Button Overlay */}
                 <button
                   className="add-to-cart-btn"
                   onClick={async () => {
@@ -102,23 +107,23 @@ export default function Boutique() {
                   }}
                   aria-label={`Add ${produit.name} to cart`}
                 >
-                  <FaPlus /> {/* Using react-icons */}
+                  <FaPlus />
                 </button>
               </div>
-              {/* Wrap text content */}
               <div className="product-info">
                 <h3>{produit.name}</h3>
                 <p>{produit.description}</p>
-                <StarRating rating={produit.rating} /> 
-                <p className="product-price">{parseFloat(produit.price).toFixed(2)} MAD</p>
+                <StarRating rating={produit.rating} />
+                <p className="product-price">{parseFloat(produit.price).toFixed(2)} €</p>
                 <p className="product-stock">En stock: {produit.stock}</p>
               </div>
             </div>
           ))
         ) : (
-          <p>No products found.</p>
+          <p>Aucun produit en or trouvé.</p>
         )}
       </div>
     </div>
   );
 }
+

@@ -1,0 +1,240 @@
+/* Payment.css - Styles for Payment Page */
+
+body {
+  background-color: #f0f2f5; /* Light background for the page */
+}
+
+.payment-page-container {
+  max-width: 1100px;
+  margin: 30px auto;
+  padding: 30px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Assuming NavBar handles the top search bar part */
+
+/* Checkout Steps */
+.checkout-steps {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 40px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #eee;
+}
+
+.step {
+  display: flex;
+  align-items: center;
+  color: #aaa;
+  font-size: 0.9rem;
+}
+
+.step svg {
+  margin-right: 8px;
+  font-size: 1.2rem;
+}
+
+.step.active,
+.step.current {
+  color: #6a7dfe; /* Active/Current step color */
+  font-weight: 500;
+}
+
+.step.current svg {
+  color: #6a7dfe; /* Highlight current step icon */
+}
+
+/* Main Content Area */
+.payment-content-area {
+  display: flex;
+  gap: 40px;
+  flex-wrap: wrap; /* Allow stacking */
+}
+
+.payment-details-billing {
+  flex: 2; /* Takes more space */
+  min-width: 450px;
+}
+
+.options-review {
+  flex: 1;
+  min-width: 300px;
+  background-color: #f8f9fa;
+  padding: 25px;
+  border-radius: 6px;
+  border: 1px solid #e9ecef;
+  height: fit-content;
+}
+
+section {
+  margin-bottom: 30px;
+}
+
+h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 15px;
+  color: #343a40;
+}
+
+/* Payment Methods */
+.method-options {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 25px;
+  flex-wrap: wrap;
+}
+
+.method-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 15px;
+  border: 1px solid #ced4da;
+  background-color: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  color: #495057;
+  transition: all 0.2s ease;
+}
+
+.method-btn:hover {
+  background-color: #f8f9fa;
+  border-color: #adb5bd;
+}
+
+.method-btn.active {
+  border-color: #6a7dfe;
+  background-color: #eef0ff;
+  color: #6a7dfe;
+  font-weight: 500;
+  box-shadow: 0 0 0 2px rgba(106, 125, 254, 0.2);
+}
+
+.method-btn svg {
+  font-size: 1.1rem;
+}
+
+/* Form Styles */
+.form-group {
+  margin-bottom: 18px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 500;
+  margin-bottom: 6px;
+  color: #495057;
+}
+
+.form-group input[type="text"] {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  font-size: 0.95rem;
+  box-sizing: border-box;
+  transition: border-color 0.2s ease;
+}
+
+.form-group input[type="text"]:focus {
+  border-color: #6a7dfe;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(106, 125, 254, 0.2);
+}
+
+.form-row {
+  display: flex;
+  gap: 15px;
+}
+
+.form-row .form-group {
+  flex: 1;
+}
+
+.form-check {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.form-check label {
+  margin-bottom: 0;
+  font-size: 0.9rem;
+  color: #495057;
+}
+
+.form-check input[type="checkbox"] {
+  cursor: pointer;
+}
+
+/* Options & Review Section */
+.option-box {
+  margin-bottom: 20px;
+}
+
+.option-box label {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+.option-box select,
+.option-box input[type="text"] {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  font-size: 0.95rem;
+  box-sizing: border-box;
+  background-color: #fff;
+}
+
+.option-box input[type="text"]:focus,
+.option-box select:focus {
+   border-color: #6a7dfe;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(106, 125, 254, 0.2);
+}
+
+.coupon-box span {
+  display: block;
+  font-size: 0.8rem;
+  color: #6a7dfe;
+  margin-top: 5px;
+}
+
+.review-order-btn {
+  width: 100%;
+  padding: 12px;
+  background-color: #6a7dfe; /* Blue button */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  margin-top: 10px;
+}
+
+.review-order-btn:hover {
+  background-color: #5a6bfd;
+}
+
+/* Placeholder messages for other payment methods */
+.payment-details-billing p {
+  font-size: 1rem;
+  color: #495057;
+  padding: 20px;
+  background-color: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 5px;
+} 
