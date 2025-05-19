@@ -1,12 +1,14 @@
 import React from 'react';
 import { Route, Routes, BrowserRouter } from 'react-router-dom'; // Importation de BrowserRouter et Routes ensemble
 import NavBar from './components/NavBar'; // Assure-toi que le chemin est correct
-import Home from './Page/Home'; // Assure-toi que le chemin est correct
+import Home from './Page/Home';
+import Anneaux from './Page/Anneaux'; 
+ // Assure-toi que le chemin est correct
 import Panier from './Page/Panier'; // Assure-toi que le chemin est correct
 import Boutique from './Page/Boutique'; // Assure-toi que le chemin est correct
 import About from './Page/About'; // Assure-toi que le chemin est correct
 import Footer from './components/Footer'; // Assure-toi que le chemin est correct
-import Login from './Page/Login'; // Assure-toi que le chemin est correct
+import Clients from './Page/Clients'; // Assure-toi que le chemin est correct
 import NouvelleCollection from './Page/NouvelleCollection'; // Assure-toi que le chemin est correct
 import Search from './Page/Search'; // Assure-toi que le chemin est correct
 import RoseGold from './Page/RoseGold';
@@ -38,9 +40,11 @@ import Payment from './Page/Payment';
 
 import Artisanal from './Page/Artisanal'; 
 import Heritage from './Page/Heritage'; 
-import Wedding from './Page/Wedding'; 
+import Wedding from './Page/Wedding';
 import Ceremonial from './Page/Ceremonial'; // Import the Payment component
+import ProductDetail from './components/ProductDetail'; // Import the ProductDetail component
 import { CartProvider } from './context/CartContext'; // Import the provider
+import Gifts from './Page/Gifts';
 
 function App() {
   return (
@@ -49,14 +53,15 @@ function App() {
         <NavBar /> {/* Barre de navigation en haut */}
         <Routes>
           {/* Routes pour chaque page */}
-          <Route path="/" element={<Home />} />
+          <Route path="/Home" element={<Home />} />
           <Route path="/Boutique" element={<Boutique />} />
           <Route path="/Panier" element={<Panier />} />
           <Route path="/about" element={<About />} />
-          <Route path="/login" element={<Login />} />
+          <Route path="/Clients" element={<Clients />} />
           <Route path="/NouvelleCollection" element={<NouvelleCollection />} />
           <Route path="/Search" element={<Search />} />
           <Route path="/boucles-oreilles/Silver" element={<Silver />} />
+          <Route path="/Anneaux" element={<Anneaux />} />
           <Route path="/anneaux/Gold" element={<Gold />} />
           <Route path="/anneaux/Silver" element={<Silver />} />
           <Route path="/anneaux/Palladium" element={<Palladium />} /><Route path="/anneaux/Silver" element={<Silver />} />
@@ -91,6 +96,17 @@ function App() {
           <Route path="/bijoux-traditionnels/Ceremonial" element={<Ceremonial />} />
           
           <Route path="/payment" element={<Payment />} /> {/* Add Payment route */}
+          
+          {/* Product Detail Route */}
+          <Route path="/product/:id" element={<ProductDetail />} />
+          
+          {/* Add the new Gifts routes */}
+          <Route path="/gifts" element={<Gifts />} />
+          <Route path="/gifts/:category" element={<Gifts />} />
+          <Route path="/gifts/:category/:subcategory" element={<Gifts />} />
+          
+          {/* Default route - redirect to home */}
+          <Route path="/" element={<Home />} />
         </Routes>
         <Footer /> {/* Footer en bas */}
       </BrowserRouter>

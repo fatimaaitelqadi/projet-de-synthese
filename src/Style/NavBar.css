@@ -72,16 +72,16 @@
   position: absolute;
   top: 100%;
   left: 0;
-  background-color: #fff;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  background-color: white;
+  border: 1px solid #eee;
+  border-radius: 4px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  z-index: 1000;
   min-width: 200px;
-  display: block;
-  padding: 10px 0;
   opacity: 0;
   visibility: hidden;
   transform: translateY(10px);
-  transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
-  z-index: 2;
+  transition: all 0.3s ease;
 }
 
 .dropdown:hover .dropdown-menu {
@@ -402,23 +402,21 @@
 }
 
 .dropdown-column h4 {
-  margin: 0 0 15px 0;
-  font-size: 1rem;
+  margin-bottom: 10px;
   font-weight: 600;
-  font-family: 'Playfair Display', serif;
-  color: #c9ab81;
-  padding-bottom: 8px;
-  border-bottom: 1px solid #f0f0f0;
+  color: #333;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 5px;
 }
 
 .dropdown-column h4 a {
-  color: #c9ab81;
+  color: #333;
   text-decoration: none;
-  transition: color 0.3s ease;
+  transition: color 0.2s ease;
 }
 
 .dropdown-column h4 a:hover {
-  color: #a88a60;
+  color: #007bff;
 }
 
 .dropdown-column ul {
@@ -428,23 +426,18 @@
 }
 
 .dropdown-column ul li {
-  margin-bottom: 10px;
-}
-
-.dropdown-column ul li:last-child {
-  margin-bottom: 0;
+  margin-bottom: 8px;
 }
 
 .dropdown-column ul li a {
-  color: #555;
+  color: #666;
   text-decoration: none;
-  font-size: 0.9rem;
-  transition: color 0.3s ease;
-  display: block;
+  font-size: 14px;
+  transition: color 0.2s ease;
 }
 
 .dropdown-column ul li a:hover {
-  color: #c9ab81;
+  color: #007bff;
 }
 
 /* Separator line */
@@ -501,4 +494,55 @@
   .dropdown-separator {
     margin: 5px 0;
   }
+}
+
+/* Gifts dropdown specific styling */
+.gifts-dropdown-grid {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  min-width: 800px;
+  padding: 20px;
+  background: white;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+  border-radius: 4px;
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+}
+
+.dropdown:hover .gifts-dropdown-grid {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+
+.gift-feature {
+  margin-top: 20px;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.gift-feature h4 {
+  margin-bottom: 10px;
+}
+
+.gift-feature-image {
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+  transition: transform 0.3s ease;
+}
+
+.gift-feature-image:hover {
+  transform: scale(1.05);
+}
+
+/* Add icon to Gifts menu item */
+.nav-item.dropdown:before {
+  margin-right: 5px;
 }

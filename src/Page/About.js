@@ -11,6 +11,9 @@ import s3 from '../Image/imageSs2.png'
 import o1 from '../Image/oo1.png'
 import o2 from '../Image/o2.png'
 import o3 from '../Image/o3.png'
+import sophe from '../Image/sophie.jpg'
+import lena from '../Image/Elena.jpg'
+import jeams from '../Image/james.jpg'
 export default function About() {
   // State for collection slider
   const [activeCollection, setActiveCollection] = useState(0);
@@ -54,21 +57,21 @@ export default function About() {
       name: "Sophie Laurent",
       location: "Paris, France",
       quote: "The craftsmanship of my engagement ring is simply extraordinary. Every time it catches the light, I'm reminded of the special day my partner proposed.",
-      avatar:s1
+      avatar:sophe
     },
     {
       id: 2,
       name: "James Wilson",
       location: "New York, USA",
       quote: "I've been collecting fine jewelry for years, and Lumière pieces stand out for their exceptional quality and timeless design. True artistry.",
-      avatar: s2
+      avatar: lena
     },
     {
       id: 3,
       name: "Elena Moretti",
       location: "Milan, Italy",
       quote: "The sapphire necklace I purchased for my anniversary has become my most treasured piece. The attention to detail is remarkable.",
-      avatar: s3
+      avatar: jeams
     }
   ];
   
@@ -267,17 +270,17 @@ export default function About() {
             {
               title: "Design",
               description: "Our creative process begins with hand-drawn sketches that capture the essence of our inspiration.",
-              image: "https://placeholder.com/600x600?text=Design"
+              image: s1
             },
             {
               title: "Creation",
               description: "Master artisans transform precious metals and gemstones into wearable art through meticulous handcrafting.",
-              image: "https://placeholder.com/600x600?text=Creation"
+              image: s2
             },
             {
               title: "Finishing",
               description: "Each piece undergoes rigorous quality control to ensure it meets our exacting standards of excellence.",
-              image: "https://placeholder.com/600x600?text=Finishing"
+              image:s3
             }
           ].map((item, index) => (
             <div className="column reveal" key={index} style={{ animationDelay: `${index * 150}ms` }}>

@@ -6,7 +6,7 @@ import Search from '../Image/search.png';
 import user from '../Image/user.png';
 // Import icons for mega menu (example)
 import { GiGoldBar, GiSilverBullet, GiCrystalShine, GiEmerald, GiDiamondRing, GiSparklingSabre, GiThorHammer, GiMetalPlate, GiStoneBlock } from 'react-icons/gi'; 
-import { FaGem, FaShoppingBag } from 'react-icons/fa'; // Generic Gem, placeholder image
+import { FaGem, FaShoppingBag, FaGift } from 'react-icons/fa'; // Added FaGift icon
 
 function NavBar() {
   // State to track which main menu item's dropdown is open (e.g., 'collection')
@@ -141,12 +141,79 @@ function NavBar() {
             </div>
           )}
         </li>
+        
+        {/* Gifts Dropdown (New Section) */}
+        <li 
+          className="nav-item dropdown" 
+          onMouseEnter={() => handleMenuEnter('gifts')}
+          onMouseLeave={handleMenuLeave}
+        >
+          Gifts
+          {openMenu === 'gifts' && (
+            <div className="dropdown-menu gifts-dropdown-grid">
+              {/* Row 1 */}
+              <div className="dropdown-row">
+                {/* Column 1: Gift Ideas */}
+                <div className="dropdown-column">
+                  <h4><Link to="/gifts/ideas">Gift Ideas</Link></h4>
+                  <ul>
+                    <li><Link to="/gifts/bestselling">Bestselling gifts</Link></li>
+                    <li><Link to="/gifts/romantic">Romantic gifts</Link></li>
+                    <li><Link to="/gifts/precious">Precious gifts</Link></li>
+                    <li><Link to="/gifts/home">Gifts for the home</Link></li>
+                  </ul>
+                </div>
+
+                {/* Column 2: Recipients */}
+                <div className="dropdown-column">
+                  <h4><Link to="/gifts/recipients">Recipients</Link></h4>
+                  <ul>
+                    <li><Link to="/gifts/for-her">Gifts for her</Link></li>
+                    <li><Link to="/gifts/for-him">Gifts for him</Link></li>
+                    <li><Link to="/gifts/new-parents">Gifts for new parents</Link></li>
+                    <li><Link to="/gifts/couple">Gifts for the couple</Link></li>
+                  </ul>
+                </div>
+
+                {/* Column 3: Occasions */}
+                <div className="dropdown-column">
+                  <h4><Link to="/gifts/occasions">Occasions</Link></h4>
+                  <ul>
+                    <li><Link to="/gifts/birthday">Birthday gifts</Link></li>
+                    <li><Link to="/gifts/graduation">Graduation gifts</Link></li>
+                    <li><Link to="/gifts/wedding">Wedding gifts</Link></li>
+                    <li><Link to="/gifts/anniversary">Anniversary gifts</Link></li>
+                    <li><Link to="/gifts/holiday">Holiday gifts</Link></li>
+                  </ul>
+                </div>
+
+                {/* Column 4: Services */}
+                <div className="dropdown-column">
+                  <h4><Link to="/gifts/services">Gift card</Link></h4>
+                  <ul>
+                    <li><Link to="/gifts/services/personal-finder">Personal Gift Finder</Link></li>
+                    <li><Link to="/gifts/services/corporate">Corporate gifts</Link></li>
+                  </ul>
+                  
+                  {/* For the Ones You Love section with image */}
+                  <div className="gift-feature">
+                    <h4><Link to="/gifts/loved-ones">For the Ones You Love</Link></h4>
+                    <Link to="/gifts/loved-ones">
+                      <img src="/images/gifts/featured-gift.jpg" alt="Gift for loved ones" className="gift-feature-image" />
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+        </li>
+        
         <li><Link to="/About" className="nav-item">About</Link></li>
       </ul>
       <ul className='nav-list1'>
         <li><Link to="/Panier" ><img src={Panier} alt='panier' className='Search' /></Link></li>
         <li><Link to="/Search"><img src={Search} alt='Search' className='Search'/></Link></li>
-        <li><Link to="/login"><img src={user} alt='user'className='Search'/></Link></li>
+        <li><Link to="/Clients"><img src={user} alt='user'className='Search'/></Link></li>
       </ul>
     </div>
   );

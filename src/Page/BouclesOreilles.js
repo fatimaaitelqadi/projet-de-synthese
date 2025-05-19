@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 // Import icons
-import { FaPlus, FaStar, FaRegStar, FaStarHalfAlt } from 'react-icons/fa';
+import { FaPlus } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 import './BouclesOreilles.css'; // Add specific styles if needed
 import './Boutique.css'; // Import shared styles
 import StarRating from '../components/StarRating'; // Import shared component
@@ -71,43 +72,87 @@ export default function BouclesOreilles() {
     fetchProduits();
   }, []);
 
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div style={{ color: 'red' }}>Error: {error}</div>;
+  if (loading) return (
+    <div className="loading-container">
+      <div className="loading-spinner"></div>
+      <p>Loading Boucles D'oreilles...</p>
+    </div>
+  );
+  
+  if (error) return (
+    <div className="error-container">
+      <p className="error-message">{error}</p>
+      <button onClick={() => window.location.reload()} className="retry-button">
+        Try Again
+      </button>
+    </div>
+  );
 
   return (
-    <div className="boucles-oreilles-container">
-      <h2>Boucles D'oreilles</h2>
-      <div className="product-grid">
-        {produits.length > 0 ? (
-          produits.map((produit) => (
-            <div key={produit.id} className="product-card">
-              <div className="product-image-container">
-                {produit.image_url ? (
-                  <img src={`${IMAGE_BASE_URL}${produit.image_url}`} alt={produit.name} className="product-image" />
-                ) : (
-                  <div className="product-no-image">No Image</div>
-                )}
-                <button
-                  className="add-to-cart-btn"
-                  onClick={() => addToCart(produit)}
-                  aria-label={`Add ${produit.name} to cart`}
-                >
-                  <FaPlus />
-                </button>
+    <>
+      <section className="relative w-full h-screen bg-black overflow-hidden">
+        {/* Video Container */}
+        <div className="absolute inset-0 w-full h-full">
+          <video
+            className="w-full h-full object-cover"
+            src="https://cdn.pixabay.com/vimeo/414869041/1080p.mp4" 
+            autoPlay
+            loop
+            muted
+            playsInline
+          ></video>
+        </div>
+
+        {/* Overlay with content */}
+        <div className="absolute inset-0 bg-black bg-opacity-40 flex flex-col items-center justify-center px-4">
+          <div className="text-center text-white max-w-3xl">
+            <h1 className="text-4xl md:text-6xl font-bold mb-6">Boucles D'oreilles</h1>
+            <p className="text-xl md:text-2xl mb-8">
+              Des créations uniques pour sublimer votre visage avec élégance
+            </p>
+          </div>
+        </div>
+      </section>
+      
+      <div className="boucles-oreilles-container">
+        <h2>Boucles D'oreilles</h2>
+        <div className="product-grid">
+          {produits.length > 0 ? (
+            produits.map((produit) => (
+              <div key={produit.id} className="product-card">
+                <div className="product-image-container">
+                  {produit.image_url ? (
+                    <Link to={`/product/${produit.id}`} className="product-image-link">
+                      <img src={`${IMAGE_BASE_URL}${produit.image_url}`} alt={produit.name} className="product-image" />
+                    </Link>
+                  ) : (
+                    <div className="product-no-image">No Image</div>
+                  )}
+                  <button
+                    className="add-to-cart-btn"
+                    onClick={() => addToCart(produit)}
+                    aria-label={`Add ${produit.name} to cart`}
+                  >
+                    <FaPlus />
+                  </button>
+                </div>
+                <div className="product-info">
+                  <h3>
+                    <Link to={`/product/${produit.id}`} className="product-name-link">
+                      {produit.name}
+                    </Link>
+                  </h3>
+                  <p>{produit.description}</p>
+                  <StarRating rating={produit.rating || 4} />
+                  <p className="product-price">{parseFloat(produit.price).toFixed(2)} €</p>
+                </div>
               </div>
-              {/* Wrap text content */}
-              <div className="product-info">
-                <h3>{produit.name}</h3>
-                <p>{produit.description}</p>
-                <StarRating rating={produit.rating || 4} />
-                <p className="product-price">{parseFloat(produit.price).toFixed(2)} €</p>
-              </div>
-            </div>
-          ))
-        ) : (
-          <p>Aucune boucle d'oreille trouvée.</p>
-        )}
+            ))
+          ) : (
+            <p>Aucune boucle d'oreille trouvée.</p>
+          )}
+        </div>
       </div>
-    </div>
+    </>
   );
 }
