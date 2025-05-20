@@ -4,7 +4,8 @@ import '../Style/NavBar.css';
 import Panier from '../Image/panier.png';
 import Search from '../Image/search.png';
 import user from '../Image/user.png';
-// Import icons for mega menu (example)
+import cadeauximage from '../Image/imageCadeaux.png';
+import imageBijoux from '../Image/imageBijoux.png';
 import { GiGoldBar, GiSilverBullet, GiCrystalShine, GiEmerald, GiDiamondRing, GiSparklingSabre, GiThorHammer, GiMetalPlate, GiStoneBlock } from 'react-icons/gi'; 
 import { FaGem, FaShoppingBag, FaGift } from 'react-icons/fa'; // Added FaGift icon
 
@@ -132,7 +133,12 @@ function NavBar() {
                       <li><Link to="/bijoux-traditionnels/artisanal">Artisanal</Link></li>
                    </ul>
                  </div>
-
+                 <div className="dropdown-column">
+                  <div className="gift-feature">
+                   
+                    <img src={imageBijoux} alt="Cadeaux en vedette" className="gift-feature-image" />
+                  </div>
+                </div>
                  {/* Add empty columns if needed to fill space, or adjust flex properties */}
                  <div className="dropdown-column"></div>
                  <div className="dropdown-column"></div>
@@ -148,59 +154,35 @@ function NavBar() {
           onMouseEnter={() => handleMenuEnter('gifts')}
           onMouseLeave={handleMenuLeave}
         >
-          Gifts
+          Cadeaux
           {openMenu === 'gifts' && (
             <div className="dropdown-menu gifts-dropdown-grid">
-              {/* Row 1 */}
               <div className="dropdown-row">
-                {/* Column 1: Gift Ideas */}
+                {/* Column 1: Gift Categories */}
                 <div className="dropdown-column">
-                  <h4><Link to="/gifts/ideas">Gift Ideas</Link></h4>
+                  <h4><Link to="/cadeaux">Catégories</Link></h4>
                   <ul>
-                    <li><Link to="/gifts/bestselling">Bestselling gifts</Link></li>
-                    <li><Link to="/gifts/romantic">Romantic gifts</Link></li>
-                    <li><Link to="/gifts/precious">Precious gifts</Link></li>
-                    <li><Link to="/gifts/home">Gifts for the home</Link></li>
+                    <li><Link to="/cadeaux/romantiques">Cadeaux romantiques</Link></li>
+                    <li><Link to="/cadeaux/personnalises">Cadeaux personnalisés</Link></li>
+                    <li><Link to="/cadeaux/coffrets">Coffrets cadeaux</Link></li>
+                    <li><Link to="/cadeaux/luxe">Cadeaux de luxe</Link></li>
                   </ul>
                 </div>
 
-                {/* Column 2: Recipients */}
+                {/* Column 2: Occasions */}
                 <div className="dropdown-column">
-                  <h4><Link to="/gifts/recipients">Recipients</Link></h4>
+                  <h4><Link to="/cadeaux/occasions">Occasions</Link></h4>
                   <ul>
-                    <li><Link to="/gifts/for-her">Gifts for her</Link></li>
-                    <li><Link to="/gifts/for-him">Gifts for him</Link></li>
-                    <li><Link to="/gifts/new-parents">Gifts for new parents</Link></li>
-                    <li><Link to="/gifts/couple">Gifts for the couple</Link></li>
+                    <li><Link to="/cadeaux/anniversaire">Cadeaux d'anniversaire</Link></li>
+                    <li><Link to="/cadeaux/saint-valentin">Cadeaux de la Saint-Valentin</Link></li>
+                    <li><Link to="/cadeaux/maman">Cadeaux pour maman</Link></li>
                   </ul>
                 </div>
 
-                {/* Column 3: Occasions */}
+                {/* Column 3: Featured Section */}
                 <div className="dropdown-column">
-                  <h4><Link to="/gifts/occasions">Occasions</Link></h4>
-                  <ul>
-                    <li><Link to="/gifts/birthday">Birthday gifts</Link></li>
-                    <li><Link to="/gifts/graduation">Graduation gifts</Link></li>
-                    <li><Link to="/gifts/wedding">Wedding gifts</Link></li>
-                    <li><Link to="/gifts/anniversary">Anniversary gifts</Link></li>
-                    <li><Link to="/gifts/holiday">Holiday gifts</Link></li>
-                  </ul>
-                </div>
-
-                {/* Column 4: Services */}
-                <div className="dropdown-column">
-                  <h4><Link to="/gifts/services">Gift card</Link></h4>
-                  <ul>
-                    <li><Link to="/gifts/services/personal-finder">Personal Gift Finder</Link></li>
-                    <li><Link to="/gifts/services/corporate">Corporate gifts</Link></li>
-                  </ul>
-                  
-                  {/* For the Ones You Love section with image */}
                   <div className="gift-feature">
-                    <h4><Link to="/gifts/loved-ones">For the Ones You Love</Link></h4>
-                    <Link to="/gifts/loved-ones">
-                      <img src="/images/gifts/featured-gift.jpg" alt="Gift for loved ones" className="gift-feature-image" />
-                    </Link>
+                    <img src={cadeauximage} alt="Cadeaux en vedette" className="gift-feature-image" />
                   </div>
                 </div>
               </div>

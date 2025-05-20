@@ -45,6 +45,7 @@ import Ceremonial from './Page/Ceremonial'; // Import the Payment component
 import ProductDetail from './components/ProductDetail'; // Import the ProductDetail component
 import { CartProvider } from './context/CartContext'; // Import the provider
 import Gifts from './Page/Gifts';
+import Cadeaux from './Page/Cadeaux';
 
 function App() {
   return (
@@ -104,6 +105,16 @@ function App() {
           <Route path="/gifts" element={<Gifts />} />
           <Route path="/gifts/:category" element={<Gifts />} />
           <Route path="/gifts/:category/:subcategory" element={<Gifts />} />
+          
+          {/* Cadeaux routes */}
+          <Route path="/cadeaux" element={<Cadeaux />} />
+          <Route path="/cadeaux/romantiques" element={<Cadeaux />} />
+          <Route path="/cadeaux/personnalises" element={<Cadeaux />} />
+          <Route path="/cadeaux/coffrets" element={<Cadeaux />} />
+          <Route path="/cadeaux/luxe" element={<Cadeaux />} />
+          <Route path="/cadeaux/anniversaire" element={<Cadeaux />} />
+          <Route path="/cadeaux/saint-valentin" element={<Cadeaux />} />
+          <Route path="/cadeaux/maman" element={<Cadeaux />} />
           
           {/* Default route - redirect to home */}
           <Route path="/" element={<Home />} />

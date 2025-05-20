@@ -1,130 +1,232 @@
-import React, { useState, useEffect, useContext } from 'react';
-import axios from 'axios';
-import { FaPlus } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
-import './BijouxTraditionnels.css'; // Add specific styles if needed
-import './Boutique.css'; // Import shared styles
-import StarRating from '../components/StarRating';
-import { useCart } from '../context/CartContext'; // Import useCart
+import React, { useState, useEffect, useRef } from 'react';
+import '../Style/Anneaux.css';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import goldeimage from '../Image/goldeanneaux.png'
+import silverimage from '../Image/imagesilver.png'
+import imagePlatine from '../Image/imagePalt.png'
+import imagePallad from '../Image/imagePallad.png.png'
+import RoseImage from '../Image/Roseimage.png'
 
-export default function BijouxTraditionnels() {
-  const [produits, setProduits] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const { addToCart } = useCart(); // Get context function
+const Anneaux = () => {
+  const navigate = useNavigate();
+  const [activeMaterial, setActiveMaterial] = useState('gold');
+  const [isVideoPlaying, setIsVideoPlaying] = useState(true);
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const sliderRef = useRef(null);
 
-  const API_URL = 'http://localhost:8000/api/produits';
-  const IMAGE_BASE_URL = 'http://localhost:8000';
+  // Données simulées
+  const bestSellers = [
+    { id: 1, name: 'Anneau Éternité Or', price: '€299', material: 'gold', isBestSeller: true },
+    { id: 2, name: 'Bague Silver Touch', price: '€199', material: 'silver' },
+    { id: 3, name: 'Alliance Platine', price: '€499', material: 'platinum', isBestSeller: true },
+  ];
 
-  useEffect(() => {
-    const fetchProduits = async () => {
-      try {
-        setLoading(true);
-        const response = await axios.get(API_URL);
+  const testimonials = [
+    { id: 1, name: 'Sophie L.', rating: 5, comment: "Mon anneau en or rose est magnifique, je reçois des compliments quotidiennement !" },
+    { id: 2, name: 'Thomas P.', rating: 4, comment: "Excellent rapport qualité-prix pour l'anneau en argent." },
+  ];
 
-        let allProduits = [];
-        if (response.data && response.data.data) {
-          allProduits = response.data.data;
-        } else if (Array.isArray(response.data)) {
-          allProduits = response.data;
-        } else {
-          console.error('BijouxTrad: Invalid data format', response.data);
-        }
+  // Données pour le slider des matériaux
+  const materials = [
+    { 
+      id: 'gold', 
+      name: 'Or', 
+      image: goldeimage,
+      description: 'Or 18 carats de la plus haute qualité',
+      path: '/anneaux/gold'
+    },
+    { 
+      id: 'silver', 
+      name: 'Argent', 
+      image: silverimage,
+      description: 'Argent sterling 925',
+      path: '/anneaux/silver'
+    },
+    { 
+      id: 'platinum', 
+      name: 'Platine', 
+      image: imagePlatine,
+      description: 'Platine pur 950',
+      path: '/anneaux/platinum'
+    },
+    { 
+      id: 'palladium', 
+      name: 'Palladium', 
+      image: imagePallad,
+      description: 'Palladium de qualité joaillerie',
+      path: '/anneaux/palladium'
+    },
+    { 
+      id: 'rose-gold', 
+      name: 'Or Rose', 
+      image: RoseImage,
+      description: 'Or rose 18 carats',
+      path: '/anneaux/RoseGold'
+    },
+  ];
 
-        const filtered = allProduits.filter(
-          (p) => p.name === 'les Bijoux Traditionnels' // Case-sensitive match
-        );
+  const scrollLeft = () => {
+    if (sliderRef.current) {
+      sliderRef.current.scrollBy({
+        left: -320,
+        behavior: 'smooth'
+      });
+    }
+  };
 
-        setProduits(filtered);
-        setError(null);
-      } catch (err) {
-        console.error("Error fetching Bijoux Traditionnels:", err);
-        setError('Failed to load products.');
-        setProduits([]);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchProduits();
-  }, []);
+  const scrollRight = () => {
+    if (sliderRef.current) {
+      sliderRef.current.scrollBy({
+        left: 320,
+        behavior: 'smooth'
+      });
+    }
+  };
 
-  if (loading) return <div className="loading-container">
-    <div className="loading-spinner"></div>
-    <p>Loading Bijoux Traditionnels...</p>
-  </div>;
-  
-  if (error) return <div className="error-container">
-    <p className="error-message">{error}</p>
-    <button onClick={() => window.location.reload()} className="retry-button">
-      Try Again
-    </button>
-  </div>;
+  const handleMaterialClick = (path) => {
+    console.log('Navigating to:', path); // Debug log
+    navigate(path);
+  };
 
   return (
-    <>
-      <section className="relative w-full h-screen bg-black overflow-hidden">
-        {/* Video Container */}
-        <div className="absolute inset-0 w-full h-full">
-          <video
-            className="w-full h-full object-cover"
-            src="https://cdn.pixabay.com/vimeo/414869041/1080p.mp4" 
-            autoPlay
-            loop
-            muted
-            playsInline
-          ></video>
-        </div>
-
-        {/* Overlay with content */}
-        <div className="absolute inset-0 bg-black bg-opacity-40 flex flex-col items-center justify-center px-4">
-          <div className="text-center text-white max-w-3xl">
-            <h1 className="text-4xl md:text-6xl font-bold mb-6">Bijoux Traditionnels</h1>
-            <p className="text-xl md:text-2xl mb-8">
-              Découvrez notre collection de bijoux traditionnels, témoins de notre riche patrimoine culturel
-            </p>
-          </div>
+    <div className="anneaux-page">
+      {/* Section 1: Vidéo de Présentation */}
+      <section className="hero-video">
+        <video 
+          autoPlay 
+          muted 
+          loop 
+          playsInline
+          onPlay={() => setIsVideoPlaying(true)}
+          onPause={() => setIsVideoPlaying(false)}
+        >
+          <source src="/videos/anneaux-presentation.mp4" type="video/mp4" />
+          Votre navigateur ne supporte pas les vidéos HTML5.
+        </video>
+        <div className={`video-overlay ${isVideoPlaying ? 'playing' : ''}`}>
+          <h1>Nos Anneaux Exceptionnels</h1>
+          <p>Découvrez des créations uniques pour chaque occasion</p>
         </div>
       </section>
-      
-      <div className="bijoux-trad-container">
-        <h2>Bijoux Traditionnels</h2>
-        <div className="product-grid">
-          {produits.length > 0 ? (
-            produits.map((produit) => (
-              <div key={produit.id} className="product-card">
-                <div className="product-image-container">
-                  {produit.image_url ? (
-                    <Link to={`/product/${produit.id}`} className="product-image-link">
-                      <img src={`${IMAGE_BASE_URL}${produit.image_url}`} alt={produit.name} className="product-image" />
-                    </Link>
-                  ) : (
-                    <div className="product-no-image">No Image</div>
-                  )}
-                  <button
-                    className="add-to-cart-btn"
-                    onClick={() => addToCart(produit)}
-                    aria-label={`Add ${produit.name} to cart`}
-                  >
-                    <FaPlus />
-                  </button>
-                </div>
-                <div className="product-info">
-                  <h3>
-                    <Link to={`/product/${produit.id}`} className="product-name-link">
-                      {produit.name}
-                    </Link>
-                  </h3>
-                  <p>{produit.description}</p>
-                  <StarRating rating={produit.rating || 4} />
-                  <p className="product-price">{parseFloat(produit.price).toFixed(2)} €</p>
+
+      {/* Section 2: Slider des Matériaux */}
+      <section className="materials-section">
+        <h2>Nos Matériaux</h2>
+        <div className="materials-slider-container" ref={sliderRef}>
+          <div className="materials-slider">
+            {materials.map((material, index) => (
+              <div 
+                key={index} 
+                className="material-slide" 
+                style={{ backgroundImage: `url(${material.image})` }}
+                onClick={() => handleMaterialClick(material.path)}
+              >
+                <div className="material-content">
+                  <h3>{material.name}</h3>
+                  <p>{material.description}</p>
                 </div>
               </div>
-            ))
-          ) : (
-            <p>Aucun bijou traditionnel trouvé.</p>
-          )}
+            ))}
+          </div>
         </div>
-      </div>
-    </>
+        <button className="scroll-nav prev" onClick={scrollLeft}>
+          <ChevronLeft />
+        </button>
+        <button className="scroll-nav next" onClick={scrollRight}>
+          <ChevronRight />
+        </button>
+      </section>
+
+      {/* Section 3: Meilleures Ventes */}
+      <section className="best-sellers">
+        <h2>Nos Best-Sellers</h2>
+        <div className="products-grid">
+          {bestSellers.map((product) => (
+            <div key={product.id} className="product-card">
+              {product.isBestSeller && <span className="best-seller-badge">TOP</span>}
+              <div className="product-image" style={{ backgroundColor: getMaterialColor(product.material) }}></div>
+              <h3>{product.name}</h3>
+              <p>{product.price}</p>
+              <button className="cta-button">Voir les détails</button>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Section 4: Avis Clients */}
+      <section className="testimonials">
+        <h2>Ce Que Disent Nos Clients</h2>
+        <div className="testimonials-container">
+          {testimonials.map((testimonial) => (
+            <div key={testimonial.id} className="testimonial-card">
+              <div className="rating">
+                {'★'.repeat(testimonial.rating)}{'☆'.repeat(5 - testimonial.rating)}
+              </div>
+              <p className="comment">"{testimonial.comment}"</p>
+              <p className="client-name">— {testimonial.name}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Section 5: Offres Spéciales */}
+      <section className="special-offer">
+        <div className="offer-content">
+          <h2>Offre Limitée !</h2>
+          <p className="discount-code">CODE : ANNEAUX10</p>
+          <p>10% de réduction sur tous les anneaux en or aujourd'hui seulement</p>
+          <button className="cta-button">Profiter de l'offre</button>
+        </div>
+      </section>
+
+      {/* Section 6: Personnalisation */}
+      <section className="customization">
+        <h2>Personnalisez Votre Anneau</h2>
+        <div className="customization-preview">
+          <div className="ring-base"></div>
+          <div className="ring-details"></div>
+        </div>
+        <button className="cta-button-outline">Commencer la personnalisation →</button>
+      </section>
+
+      {/* Section 7: FAQ */}
+      <section className="faq">
+        <h2>Questions Fréquentes</h2>
+        <div className="faq-item">
+          <h3>Comment choisir la bonne taille d'anneau ?</h3>
+          <p>Nous proposons un guide des tailles détaillé et un outil de mesure à imprimer.</p>
+        </div>
+        <div className="faq-item">
+          <h3>Quels sont les matériaux les plus résistants ?</h3>
+          <p>Le platine et le palladium sont les plus durables, tandis que l'or 18 carats offre un bon équilibre.</p>
+        </div>
+      </section>
+
+      {/* Section 8: Newsletter */}
+      <section className="newsletter">
+        <h2>Restez Informé</h2>
+        <p>Abonnez-vous pour recevoir nos nouveautés et offres exclusives</p>
+        <form className="newsletter-form">
+          <input type="email" placeholder="Votre email" required />
+          <button type="submit" className="cta-button">S'abonner</button>
+        </form>
+        <p className="small-text">En vous inscrivant, vous recevrez un guide d'entretien gratuit.</p>
+      </section>
+    </div>
   );
-}
+};
+
+// Fonction utilitaire pour la couleur des matériaux
+const getMaterialColor = (material) => {
+  const colors = {
+    gold: '#FFD700',
+    silver: '#C0C0C0',
+    platinum: '#E5E4E2',
+    palladium: '#B4B4B4',
+    'rose-gold': '#E0BFB8'
+  };
+  return colors[material] || '#333';
+};
+
+export default Anneaux;
