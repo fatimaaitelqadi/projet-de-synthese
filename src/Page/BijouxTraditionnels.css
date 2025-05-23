@@ -1,1 +1,96 @@
-/* Styles for BijouxTraditionnels page */ 
+/* BijouxTraditionnels.css - Traditional Jewelry Theme */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap');
+
+.bijoux-traditionnels-page {
+  /* Inherits base styles from anneaux-page */
+}
+
+/* Hero Section Customization */
+.bijoux-hero .content {
+  background: linear-gradient(to right, rgba(120, 81, 31, 0.8), rgba(120, 81, 31, 0.5));
+  z-index: 2;
+}
+
+.bijoux-background::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 1;
+}
+
+.bijoux-hero .content h1 {
+  font-family: 'Playfair Display', serif;
+  text-transform: none;
+  letter-spacing: 1px;
+  font-size: clamp(3rem, 5vw, 5rem);
+  font-weight: 600;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+.bijoux-hero .content p {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-weight: 400;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
+}
+
+@keyframes slow-zoom {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.1);
+  }
+}
+
+/* Special Offer Section */
+.bijoux-traditionnels-page .special-offer {
+  background: linear-gradient(135deg, #78512f, #a67c52);
+}
+
+.bijoux-traditionnels-page .discount-code {
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* Best Sellers Customization */
+.bijoux-traditionnels-page .best-sellers h2 {
+  font-family: 'Playfair Display', serif;
+  color: #78512f;
+}
+
+.bijoux-traditionnels-page .best-sellers h2::after {
+  background: #78512f;
+}
+
+.bijoux-traditionnels-page .best-seller-badge {
+  background: #78512f;
+}
+
+.bijoux-traditionnels-page .product-info .price {
+  color: #78512f;
+}
+
+.bijoux-traditionnels-page .cta-button {
+  background: #78512f;
+}
+
+.bijoux-traditionnels-page .cta-button:hover {
+  background: #5d3e24;
+}
+
+/* Materials Section */
+.bijoux-traditionnels-page .material-content {
+  background: linear-gradient(transparent, rgba(120, 81, 31, 0.8));
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .bijoux-hero .content h1 {
+    font-size: clamp(2.5rem, 4vw, 4rem);
+  }
+} 

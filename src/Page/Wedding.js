@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { productService } from '../services/api';
 import { FaPlus } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { Link, useNavigate } from 'react-router-dom';
 import './BouclesOreilles.css';
 import './Boutique.css';
 import StarRating from '../components/StarRating';
@@ -12,6 +13,7 @@ export default function Wedding() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const { addToCart } = useCart();
+  const navigate = useNavigate();
 
   const IMAGE_BASE_URL = 'http://127.0.0.1:8000/storage/';
 
@@ -77,24 +79,21 @@ export default function Wedding() {
   return (
     <>
       <section className="relative w-full h-screen bg-black overflow-hidden">
-        {/* Video Container */}
-        <div className="absolute inset-0 w-full h-full">
-          <video
-            className="w-full h-full object-cover"
-            src="https://cdn.pixabay.com/vimeo/414869041/1080p.mp4" 
-            autoPlay
-            loop
-            muted
-            playsInline
-          ></video>
-        </div>
+        {/* Hero Image Container */}
+        <div 
+          className="absolute inset-0 w-full h-full bg-cover bg-center"
+          style={{ 
+            backgroundImage: 'url(https://images.unsplash.com/photo-1550005809-91ad75fb315f?w=1200&h=800&fit=crop&crop=center)',
+            animation: 'slow-zoom 30s infinite alternate'
+          }}
+        ></div>
 
         {/* Overlay with content */}
         <div className="absolute inset-0 bg-black bg-opacity-40 flex flex-col items-center justify-center px-4">
           <div className="text-center text-white max-w-3xl">
-            <h1 className="text-4xl md:text-6xl font-bold mb-6">Wedding Collection</h1>
+            <h1 className="text-4xl md:text-6xl font-bold mb-6">Bijoux de Mariage</h1>
             <p className="text-xl md:text-2xl mb-8">
-              Des bijoux exceptionnels pour sublimer votre jour J
+              Des créations élégantes pour le plus beau jour de votre vie
             </p>
           </div>
         </div>

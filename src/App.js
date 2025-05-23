@@ -3,9 +3,16 @@ import { Route, Routes, BrowserRouter } from 'react-router-dom'; // Importation 
 import NavBar from './components/NavBar'; // Assure-toi que le chemin est correct
 import Home from './Page/Home';
 import Anneaux from './Page/Anneaux'; 
+import BouclesOreilles from './Page/BouclesOreilles'; 
+
  // Assure-toi que le chemin est correct
-import Panier from './Page/Panier'; // Assure-toi que le chemin est correct
+import Panier from './Page/Panier';
+ // Assure-toi que le chemin est correct
 import Boutique from './Page/Boutique'; // Assure-toi que le chemin est correct
+import Braceles from './Page/Braceles'; // Assure-toi que le chemin est correct
+import Watches from './Page/Watches'; // Assure-toi que le chemin est correct
+import Coliers from './Page/Coliers'; // Assure-toi que le chemin est correct
+
 import About from './Page/About'; // Assure-toi que le chemin est correct
 import Footer from './components/Footer'; // Assure-toi que le chemin est correct
 import Clients from './Page/Clients'; // Assure-toi que le chemin est correct
@@ -37,6 +44,7 @@ import Charm from './Page/Charm';
 import Cuff from './Page/Cuff'; 
 import Chain from './Page/Chain'; 
 import Payment from './Page/Payment';
+import BijouxTraditionnels from './Page/BijouxTraditionnels';
 
 import Artisanal from './Page/Artisanal'; 
 import Heritage from './Page/Heritage'; 
@@ -46,6 +54,13 @@ import ProductDetail from './components/ProductDetail'; // Import the ProductDet
 import { CartProvider } from './context/CartContext'; // Import the provider
 import Gifts from './Page/Gifts';
 import Cadeaux from './Page/Cadeaux';
+import CadeauxAnniversaire from './Page/CadeauxAnniversaire';
+import CadeauxValentin from './Page/CadeauxValentin';
+import CadeauxRomantiques from './Page/CadeauxRomantiques';
+import CadeauxPersonnalisés from './Page/CadeauxPersonnalisés';
+import CadeauxMaman from './Page/CadeauxMaman';
+import CadeauxLuxe from './Page/CadeauxLuxe';
+import CoffretsCadeaux from './Page/CoffretsCadeaux';
 
 function App() {
   return (
@@ -62,23 +77,29 @@ function App() {
           <Route path="/NouvelleCollection" element={<NouvelleCollection />} />
           <Route path="/Search" element={<Search />} />
           <Route path="/boucles-oreilles/Silver" element={<Silver />} />
+          <Route path="/BijouxTraditionnels" element={<BijouxTraditionnels />} />
           <Route path="/Anneaux" element={<Anneaux />} />
           <Route path="/anneaux/Gold" element={<Gold />} />
           <Route path="/anneaux/Silver" element={<Silver />} />
           <Route path="/anneaux/Palladium" element={<Palladium />} /><Route path="/anneaux/Silver" element={<Silver />} />
           <Route path="/anneaux/Platinum" element={<Platinum />} /><Route path="/anneaux/Silver" element={<Silver />} />
           <Route path="/anneaux/RoseGold" element={<RoseGold />} />
+          <Route path="/BouclesOreilles" element={<BouclesOreilles />} />
+          <Route path="/Braceles" element={<Braceles />} />
+
           <Route path="/boucles-oreilles/Studs" element={<Studs />} />
           <Route path="/boucles-oreilles/Hoops" element={<Hoops />} />
           <Route path="/boucles-oreilles/Drops" element={<Drops />} />
           <Route path="/boucles-oreilles/Chandeliers" element={<Chandeliers />} />
           <Route path="/boucles-oreilles/Cuffs" element={<Cuffs />} />
+          <Route path="/Watches" element={<Watches />} />
+
           <Route path="/watches/Luxury" element={<Luxury />} />
           <Route path="/watches/Sport" element={<Sport />} />
           <Route path="/watches/Casual" element={<Casual />} />
           <Route path="/watches/Smart" element={<Smart />} />
           <Route path="/watches/Vintage" element={<Vintage />} />
-
+          <Route path="/Coliers" element={<Coliers />} />
           <Route path="/cliers/Pendants" element={<Pendants />} />
           <Route path="/cliers/Chains" element={<Chains />} />
           <Route path="/cliers/Pearls" element={<Pearls />} />
@@ -108,13 +129,13 @@ function App() {
           
           {/* Cadeaux routes */}
           <Route path="/cadeaux" element={<Cadeaux />} />
-          <Route path="/cadeaux/romantiques" element={<Cadeaux />} />
-          <Route path="/cadeaux/personnalises" element={<Cadeaux />} />
-          <Route path="/cadeaux/coffrets" element={<Cadeaux />} />
-          <Route path="/cadeaux/luxe" element={<Cadeaux />} />
-          <Route path="/cadeaux/anniversaire" element={<Cadeaux />} />
-          <Route path="/cadeaux/saint-valentin" element={<Cadeaux />} />
-          <Route path="/cadeaux/maman" element={<Cadeaux />} />
+          <Route path="/cadeaux/romantiques" element={<CadeauxRomantiques />} />
+          <Route path="/cadeaux/personnalises" element={<CadeauxPersonnalisés />} />
+          <Route path="/cadeaux/coffrets" element={<CoffretsCadeaux />} />
+          <Route path="/cadeaux/luxe" element={<CadeauxLuxe />} />
+          <Route path="/cadeaux/anniversaire" element={<CadeauxAnniversaire />} />
+          <Route path="/cadeaux/CadeauxValentin" element={<CadeauxValentin />} />
+          <Route path="/cadeaux/maman" element={<CadeauxMaman />} />
           
           {/* Default route - redirect to home */}
           <Route path="/" element={<Home />} />

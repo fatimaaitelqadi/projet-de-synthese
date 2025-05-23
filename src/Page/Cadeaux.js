@@ -13,7 +13,7 @@ export default function Cadeaux() {
   const [error, setError] = useState(null);
   const { addToCart } = useCart();
 
-  const IMAGE_BASE_URL = 'http://127.0.0.1:8000/storage/';
+  const IMAGE_BASE_URL = '/';
 
   useEffect(() => {
     const fetchProduits = async () => {

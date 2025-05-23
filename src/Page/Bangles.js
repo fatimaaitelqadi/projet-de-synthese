@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { productService } from '../services/api';
 import { FaPlus } from 'react-icons/fa';
-
-import { Link } from 'react-router-dom';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { Link, useNavigate } from 'react-router-dom';
 import './BouclesOreilles.css';
 import './Boutique.css';
 import StarRating from '../components/StarRating';
@@ -13,8 +13,58 @@ export default function Bangles() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const { addToCart } = useCart();
+  const sliderRef = useRef(null);
+  const navigate = useNavigate();
 
   const IMAGE_BASE_URL = 'http://127.0.0.1:8000/storage/';
+
+  // Materials data
+  const materials = [
+    { 
+      id: 'gold', 
+      name: 'Or', 
+      image: 'https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=300&h=300&fit=crop&crop=center',
+      description: 'Bracelets en or 18 carats',
+      path: '/Bangles/gold'
+    },
+    { 
+      id: 'silver', 
+      name: 'Argent', 
+      image: 'https://images.unsplash.com/photo-1611652022419-a9419f74343d?w=300&h=300&fit=crop&crop=center',
+      description: 'Bracelets en argent sterling 925',
+      path: '/Bangles/silver'
+    },
+    { 
+      id: 'diamond', 
+      name: 'Diamant', 
+      image: 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=300&h=300&fit=crop&crop=center',
+      description: 'Bracelets ornés de diamants',
+      path: '/Bangles/diamond'
+    },
+    { 
+      id: 'rose-gold', 
+      name: 'Or Rose', 
+      image: 'https://images.unsplash.com/photo-1588444650700-6a4d3e013230?w=300&h=300&fit=crop&crop=center',
+      description: 'Bracelets en or rose 18 carats',
+      path: '/Bangles/rose-gold'
+    },
+  ];
+
+  const scrollLeft = () => {
+    if (sliderRef.current) {
+      sliderRef.current.scrollBy({ left: -320, behavior: 'smooth' });
+    }
+  };
+
+  const scrollRight = () => {
+    if (sliderRef.current) {
+      sliderRef.current.scrollBy({ left: 320, behavior: 'smooth' });
+    }
+  };
+
+  const handleMaterialClick = (path) => {
+    navigate(path);
+  };
 
   useEffect(() => {
     const fetchProduits = async () => {
@@ -97,6 +147,48 @@ export default function Bangles() {
             <p className="text-xl md:text-2xl mb-8">
               Elegant bracelets to adorn your wrists with timeless beauty
             </p>
+          </div>
+        </div>
+      </section>
+      
+      {/* Materials Slider Section */}
+      <section className="materials-section py-16 bg-gray-50">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl font-bold text-center mb-10">Nos Matériaux</h2>
+          <div className="materials-slider-container relative" ref={sliderRef}>
+            <div className="materials-slider flex overflow-x-auto scrollbar-hide gap-6 pb-4">
+              {materials.map((material, index) => (
+                <div 
+                  key={index} 
+                  className="material-slide flex-shrink-0 w-80 h-64 rounded-lg overflow-hidden shadow-lg cursor-pointer transform transition hover:scale-105"
+                  onClick={() => handleMaterialClick(material.path)}
+                >
+                  <div 
+                    className="h-full w-full bg-cover bg-center relative"
+                    style={{ backgroundImage: `url(${material.image})` }}
+                  >
+                    <div className="absolute inset-0 bg-black bg-opacity-30 flex flex-col justify-end p-6 hover:bg-opacity-20 transition">
+                      <h3 className="text-white text-xl font-bold">{material.name}</h3>
+                      <p className="text-white text-sm mt-2">{material.description}</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="flex justify-center mt-6 gap-4">
+            <button 
+              className="bg-gray-800 text-white p-3 rounded-full hover:bg-gray-700 transition"
+              onClick={scrollLeft}
+            >
+              <ChevronLeft size={20} />
+            </button>
+            <button 
+              className="bg-gray-800 text-white p-3 rounded-full hover:bg-gray-700 transition"
+              onClick={scrollRight}
+            >
+              <ChevronRight size={20} />
+            </button>
           </div>
         </div>
       </section>

@@ -71,7 +71,7 @@ function NavBar() {
 
                 {/* Column 1.2: Boucles d'oreilles */}
                 <div className="dropdown-column">
-                   <h4><Link to="/boucles-oreilles">Les Boucles d'Oreilles</Link></h4>
+                   <h4><Link to="/BouclesOreilles">Les Boucles d'Oreilles</Link></h4>
                    <ul>
                      <li><Link to="/boucles-oreilles/studs">Studs</Link></li>
                      <li><Link to="/boucles-oreilles/hoops">Hoops</Link></li>
@@ -83,7 +83,7 @@ function NavBar() {
 
                 {/* Column 1.3: Watches */}
                 <div className="dropdown-column">
-                  <h4><Link to="/watches">Watches</Link></h4>
+                  <h4><Link to="/Watches">Watches</Link></h4>
                   <ul>
                     <li><Link to="/watches/luxury">Luxury</Link></li>
                     <li><Link to="/watches/sport">Sport</Link></li>
@@ -95,7 +95,7 @@ function NavBar() {
 
                 {/* Column 1.4: Cliers */}
                 <div className="dropdown-column">
-                  <h4><Link to="/cliers">Les Cliers</Link></h4>
+                  <h4><Link to="/Coliers">Les Cliers</Link></h4>
                   <ul>
                      <li><Link to="/cliers/pendants">Pendants</Link></li>
                      <li><Link to="/cliers/chokers">Chokers</Link></li>
@@ -113,7 +113,7 @@ function NavBar() {
               <div className="dropdown-row">
                  {/* Column 2.1: Braceles */}
                  <div className="dropdown-column">
-                   <h4><Link to="/braceles">Les Braceles</Link></h4>
+                   <h4><Link to="/Braceles">Les Braceles</Link></h4>
                    <ul>
                       <li><Link to="/braceles/bangles">Bangles</Link></li>
                       <li><Link to="/braceles/tennis">Tennis</Link></li>
@@ -125,7 +125,7 @@ function NavBar() {
 
                  {/* Column 2.2: Bijoux Traditionnels */}
                  <div className="dropdown-column">
-                   <h4><Link to="/bijoux-traditionnels">Les Bijoux Traditionnels</Link></h4>
+                   <h4><Link to="/BijouxTraditionnels">Les Bijoux Traditionnels</Link></h4>
                    <ul>
                       <li><Link to="/bijoux-traditionnels/wedding">Wedding</Link></li>
                       <li><Link to="/bijoux-traditionnels/ceremonial">Ceremonial</Link></li>
@@ -171,10 +171,10 @@ function NavBar() {
 
                 {/* Column 2: Occasions */}
                 <div className="dropdown-column">
-                  <h4><Link to="/cadeaux/occasions">Occasions</Link></h4>
+                  <h4><Link to="/cadeaux">Occasions</Link></h4>
                   <ul>
                     <li><Link to="/cadeaux/anniversaire">Cadeaux d'anniversaire</Link></li>
-                    <li><Link to="/cadeaux/saint-valentin">Cadeaux de la Saint-Valentin</Link></li>
+                    <li><Link to="/cadeaux/CadeauxValentin">Cadeaux de la Saint-Valentin</Link></li>
                     <li><Link to="/cadeaux/maman">Cadeaux pour maman</Link></li>
                   </ul>
                 </div>

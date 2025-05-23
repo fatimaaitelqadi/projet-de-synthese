@@ -76,29 +76,6 @@ export default function Drops() {
 
   return (
     <>
-      <section className="relative w-full h-screen bg-black overflow-hidden">
-        {/* Video Container */}
-        <div className="absolute inset-0 w-full h-full">
-          <video
-            className="w-full h-full object-cover"
-            src="https://cdn.pixabay.com/vimeo/414869041/1080p.mp4" 
-            autoPlay
-            loop
-            muted
-            playsInline
-          ></video>
-        </div>
-
-        {/* Overlay with content */}
-        <div className="absolute inset-0 bg-black bg-opacity-40 flex flex-col items-center justify-center px-4">
-          <div className="text-center text-white max-w-3xl">
-            <h1 className="text-4xl md:text-6xl font-bold mb-6">Drops Collection</h1>
-            <p className="text-xl md:text-2xl mb-8">
-              Des pendentifs délicats et raffinés pour un style unique
-            </p>
-          </div>
-        </div>
-      </section>
       
       <div className="boucles-oreilles-container">
         <h2>Drops Collection</h2>

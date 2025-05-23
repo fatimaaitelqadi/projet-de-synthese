@@ -201,3 +201,122 @@
       height: 240px;
     }
   }
+
+/* BouclesOreilles.css - Earrings Collection Theme */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap');
+
+.boucles-oreilles-page {
+  /* Inherits base styles from anneaux-page */
+}
+
+/* Hero Section Customization */
+.boucles-hero .content {
+  background: linear-gradient(to right, rgba(145, 107, 191, 0.8), rgba(145, 107, 191, 0.5));
+  z-index: 2;
+}
+
+.boucles-background::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 1;
+}
+
+.boucles-hero .content h1 {
+  font-family: 'Cormorant Garamond', serif;
+  text-transform: none;
+  letter-spacing: 1px;
+  font-size: clamp(3rem, 5vw, 5rem);
+  font-weight: 600;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+.boucles-hero .content p {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 300;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
+}
+
+@keyframes slow-zoom {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.1);
+  }
+}
+
+/* Special Offer Section */
+.boucles-oreilles-page .special-offer {
+  background: linear-gradient(135deg, #8a4fbf, #b07ad6);
+}
+
+.boucles-oreilles-page .discount-code {
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* Best Sellers Customization */
+.boucles-oreilles-page .best-sellers h2 {
+  font-family: 'Cormorant Garamond', serif;
+  color: #8a4fbf;
+}
+
+.boucles-oreilles-page .best-sellers h2::after {
+  background: #8a4fbf;
+}
+
+.boucles-oreilles-page .best-seller-badge {
+  background: #8a4fbf;
+}
+
+.boucles-oreilles-page .product-info .price {
+  color: #8a4fbf;
+}
+
+.boucles-oreilles-page .cta-button {
+  background: #8a4fbf;
+}
+
+.boucles-oreilles-page .cta-button:hover {
+  background: #7a3eaf;
+}
+
+/* Materials Section */
+.boucles-oreilles-page .material-content {
+  background: linear-gradient(transparent, rgba(145, 107, 191, 0.8));
+}
+
+/* FAQ Section */
+.boucles-oreilles-page .faq-question h3 {
+  color: #8a4fbf;
+}
+
+/* Testimonials */
+.boucles-oreilles-page .testimonial-card {
+  border-color: rgba(145, 107, 191, 0.3);
+}
+
+.boucles-oreilles-page .star-filled {
+  color: #8a4fbf;
+}
+
+/* Newsletter */
+.boucles-oreilles-page .newsletter {
+  background: linear-gradient(to right, #f5f0fa, #e9daf5);
+}
+
+.boucles-oreilles-page .newsletter h2 {
+  color: #8a4fbf;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .boucles-hero .content h1 {
+    font-size: clamp(2.5rem, 4vw, 4rem);
+  }
+}

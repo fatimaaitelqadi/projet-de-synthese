@@ -1,0 +1,125 @@
+/* Watches.css - Luxury Watches Collection Theme */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap');
+
+.watches-page {
+  /* Inherits base styles from anneaux-page */
+}
+
+/* Hero Section Customization */
+.watches-hero .content {
+  background: linear-gradient(to right, rgba(28, 35, 49, 0.8), rgba(28, 35, 49, 0.5));
+  z-index: 2;
+}
+
+.watches-background::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 1;
+}
+
+.watches-hero .content h1 {
+  font-family: 'Playfair Display', serif;
+  text-transform: none;
+  letter-spacing: 1px;
+  font-size: clamp(3rem, 5vw, 5rem);
+  font-weight: 600;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+.watches-hero .content p {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 300;
+  letter-spacing: 1px;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
+}
+
+@keyframes slow-zoom {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.1);
+  }
+}
+
+/* Special Offer Section */
+.watches-page .special-offer {
+  background: linear-gradient(135deg, #1c2331, #2c3e50);
+}
+
+.watches-page .discount-code {
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* Best Sellers Customization */
+.watches-page .best-sellers h2 {
+  font-family: 'Playfair Display', serif;
+  color: #1c2331;
+}
+
+.watches-page .best-sellers h2::after {
+  background: #1c2331;
+}
+
+.watches-page .best-seller-badge {
+  background: #1c2331;
+}
+
+.watches-page .product-info .price {
+  color: #1c2331;
+  font-weight: 600;
+}
+
+.watches-page .cta-button {
+  background: #1c2331;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 500;
+}
+
+.watches-page .cta-button:hover {
+  background: #2c3e50;
+}
+
+/* Materials Section */
+.watches-page .material-content {
+  background: linear-gradient(transparent, rgba(28, 35, 49, 0.8));
+}
+
+/* FAQ Section */
+.watches-page .faq-question h3 {
+  color: #1c2331;
+  font-family: 'Playfair Display', serif;
+}
+
+/* Testimonials */
+.watches-page .testimonial-card {
+  border-color: rgba(28, 35, 49, 0.3);
+}
+
+.watches-page .star-filled {
+  color: #1c2331;
+}
+
+/* Newsletter */
+.watches-page .newsletter {
+  background: linear-gradient(to right, #f0f2f5, #e6eaef);
+}
+
+.watches-page .newsletter h2 {
+  color: #1c2331;
+  font-family: 'Playfair Display', serif;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .watches-hero .content h1 {
+    font-size: clamp(2.5rem, 4vw, 4rem);
+  }
+} 

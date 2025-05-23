@@ -1,25 +1,125 @@
-import React, { useState, useEffect, useRef } from 'react';
-import '../Style/Anneaux.css';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import React, { useState, useRef } from 'react';
+import { ChevronLeft, ChevronRight, ChevronDown, ChevronUp } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import goldeimage from '../Image/goldeanneaux.png'
-import silverimage from '../Image/imagesilver.png'
-import imagePlatine from '../Image/imagePalt.png'
-import imagePallad from '../Image/imagePallad.png.png'
-import RoseImage from '../Image/Roseimage.png'
+import goldeimage from '../Image/goldeanneaux.png';
+import silverimage from '../Image/imagesilver.png';
+import imagePlatine from '../Image/imagePalt.png';
+import imagePallad from '../Image/imagePallad.png.png';
+import RoseImage from '../Image/Roseimage.png';
+import videoBackground from '../Image/Video2.mp4';
+import './Anneaux.css';
 
 const Anneaux = () => {
   const navigate = useNavigate();
-  const [activeMaterial, setActiveMaterial] = useState('gold');
   const [isVideoPlaying, setIsVideoPlaying] = useState(true);
-  const [currentSlide, setCurrentSlide] = useState(0);
+  const [openFaqIndex, setOpenFaqIndex] = useState(null);
   const sliderRef = useRef(null);
 
-  // Données simulées
+  // Enhanced best sellers data with 10 items
   const bestSellers = [
-    { id: 1, name: 'Anneau Éternité Or', price: '€299', material: 'gold', isBestSeller: true },
-    { id: 2, name: 'Bague Silver Touch', price: '€199', material: 'silver' },
-    { id: 3, name: 'Alliance Platine', price: '€499', material: 'platinum', isBestSeller: true },
+    { 
+      id: 1, 
+      name: 'Anneau Éternité Or', 
+      price: '€299', 
+      material: 'gold', 
+      isBestSeller: true,
+      image: 'https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=300&h=300&fit=crop&crop=center'
+    },
+    { 
+      id: 2, 
+      name: 'Bague Silver Touch', 
+      price: '€199', 
+      material: 'silver',
+      image: 'https://images.unsplash.com/photo-1611652022419-a9419f74343d?w=300&h=300&fit=crop&crop=center'
+    },
+    { 
+      id: 3, 
+      name: 'Alliance Platine', 
+      price: '€499', 
+      material: 'platinum', 
+      isBestSeller: true,
+      image: 'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=300&h=300&fit=crop&crop=center'
+    },
+    { 
+      id: 4, 
+      name: 'Bague Solitaire', 
+      price: '€399', 
+      material: 'gold',
+      image: 'https://images.unsplash.com/photo-1603561596112-6a132309c76c?w=300&h=300&fit=crop&crop=center'
+    },
+    { 
+      id: 5, 
+      name: 'Anneau Rose Gold', 
+      price: '€349', 
+      material: 'rose-gold', 
+      isBestSeller: true,
+      image: 'https://images.unsplash.com/photo-1588444650700-6a4d3e013230?w=300&h=300&fit=crop&crop=center'
+    },
+    { 
+      id: 6, 
+      name: 'Alliance Moderne', 
+      price: '€259', 
+      material: 'silver',
+      image: 'https://images.unsplash.com/photo-1617038260897-41a1f14a8ca0?w=300&h=300&fit=crop&crop=center'
+    },
+    { 
+      id: 7, 
+      name: 'Bague Palladium', 
+      price: '€449', 
+      material: 'palladium',
+      image: 'https://images.unsplash.com/photo-1603561591411-07134e71a2a9?w=300&h=300&fit=crop&crop=center'
+    },
+    { 
+      id: 8, 
+      name: 'Anneau Vintage', 
+      price: '€329', 
+      material: 'gold', 
+      isBestSeller: true,
+      image: 'https://images.unsplash.com/photo-1614607242094-b1b2cf769ff3?w=300&h=300&fit=crop&crop=center'
+    },
+    { 
+      id: 9, 
+      name: 'Alliance Élégante', 
+      price: '€279', 
+      material: 'platinum',
+      image: 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=300&h=300&fit=crop&crop=center'
+    },
+    { 
+      id: 10, 
+      name: 'Bague Luxe', 
+      price: '€599', 
+      material: 'rose-gold', 
+      isBestSeller: true,
+      image: 'https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=300&h=300&fit=crop&crop=center'
+    }
+  ];
+
+  // FAQ data with 6 questions
+  const faqData = [
+    {
+      question: "Comment choisir la bonne taille d'anneau ?",
+      answer: "Nous proposons un guide des tailles détaillé et un outil de mesure à imprimer. Vous pouvez également visiter notre boutique pour un essayage personnalisé ou commander notre baguier gratuit à domicile."
+    },
+    {
+      question: "Quels sont les matériaux les plus résistants ?",
+      answer: "Le platine et le palladium sont les plus durables et résistants aux rayures, tandis que l'or 18 carats offre un excellent équilibre entre beauté et résistance. L'argent sterling 925 est également très durable avec un entretien approprié."
+    },
+    {
+      question: "Proposez-vous une garantie sur vos anneaux ?",
+      answer: "Oui, tous nos anneaux sont garantis 2 ans contre les défauts de fabrication. Nous offrons également un service de polissage gratuit la première année et des réparations à prix préférentiel."
+    },
+    {
+      question: "Puis-je personnaliser mon anneau ?",
+      answer: "Absolument ! Nous proposons une large gamme d'options de personnalisation : gravure intérieure ou extérieure, choix de pierres précieuses, modification des dimensions, et création sur mesure selon vos désirs."
+    },
+    {
+      question: "Quels sont les délais de livraison ?",
+      answer: "Pour les modèles en stock, la livraison se fait sous 48-72h. Pour les pièces personnalisées, comptez 2-3 semaines. Nous proposons également une livraison express 24h pour les commandes urgentes."
+    },
+    {
+      question: "Comment entretenir mon anneau ?",
+      answer: "Chaque anneau est livré avec un guide d'entretien personnalisé selon le matériau. En général, un nettoyage doux avec de l'eau savonneuse et un polissage régulier suffisent. Évitez les produits chimiques agressifs."
+    }
   ];
 
   const testimonials = [
@@ -27,7 +127,7 @@ const Anneaux = () => {
     { id: 2, name: 'Thomas P.', rating: 4, comment: "Excellent rapport qualité-prix pour l'anneau en argent." },
   ];
 
-  // Données pour le slider des matériaux
+  // Materials data
   const materials = [
     { 
       id: 'gold', 
@@ -68,49 +168,57 @@ const Anneaux = () => {
 
   const scrollLeft = () => {
     if (sliderRef.current) {
-      sliderRef.current.scrollBy({
-        left: -320,
-        behavior: 'smooth'
-      });
+      sliderRef.current.scrollBy({ left: -320, behavior: 'smooth' });
     }
   };
 
   const scrollRight = () => {
     if (sliderRef.current) {
-      sliderRef.current.scrollBy({
-        left: 320,
-        behavior: 'smooth'
-      });
+      sliderRef.current.scrollBy({ left: 320, behavior: 'smooth' });
     }
   };
 
   const handleMaterialClick = (path) => {
-    console.log('Navigating to:', path); // Debug log
     navigate(path);
+  };
+
+  const toggleFaq = (index) => {
+    setOpenFaqIndex(openFaqIndex === index ? null : index);
+  };
+
+  const getMaterialColor = (material) => {
+    const colors = {
+      gold: '#FFD700',
+      silver: '#C0C0C0',
+      platinum: '#E5E4E2',
+      palladium: '#B4B4B4',
+      'rose-gold': '#E0BFB8'
+    };
+    return colors[material] || '#333';
   };
 
   return (
     <div className="anneaux-page">
-      {/* Section 1: Vidéo de Présentation */}
+      {/* Hero Section */}
       <section className="hero-video">
-        <video 
-          autoPlay 
-          muted 
-          loop 
-          playsInline
-          onPlay={() => setIsVideoPlaying(true)}
-          onPause={() => setIsVideoPlaying(false)}
-        >
-          <source src="/videos/anneaux-presentation.mp4" type="video/mp4" />
-          Votre navigateur ne supporte pas les vidéos HTML5.
-        </video>
-        <div className={`video-overlay ${isVideoPlaying ? 'playing' : ''}`}>
-          <h1>Nos Anneaux Exceptionnels</h1>
-          <p>Découvrez des créations uniques pour chaque occasion</p>
+        <div className="Main">
+          <video 
+            src={videoBackground} 
+            autoPlay 
+            loop 
+            muted 
+            playsInline
+            className="video"
+            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+          />
+          <div className="content">
+            <h1>Collection d'Anneaux Exclusifs</h1>
+            <p>Des créations raffinées pour sublimer chaque moment de votre vie</p>
+          </div>
         </div>
       </section>
 
-      {/* Section 2: Slider des Matériaux */}
+      {/* Materials Slider */}
       <section className="materials-section">
         <h2>Nos Matériaux</h2>
         <div className="materials-slider-container" ref={sliderRef}>
@@ -138,39 +246,7 @@ const Anneaux = () => {
         </button>
       </section>
 
-      {/* Section 3: Meilleures Ventes */}
-      <section className="best-sellers">
-        <h2>Nos Best-Sellers</h2>
-        <div className="products-grid">
-          {bestSellers.map((product) => (
-            <div key={product.id} className="product-card">
-              {product.isBestSeller && <span className="best-seller-badge">TOP</span>}
-              <div className="product-image" style={{ backgroundColor: getMaterialColor(product.material) }}></div>
-              <h3>{product.name}</h3>
-              <p>{product.price}</p>
-              <button className="cta-button">Voir les détails</button>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Section 4: Avis Clients */}
-      <section className="testimonials">
-        <h2>Ce Que Disent Nos Clients</h2>
-        <div className="testimonials-container">
-          {testimonials.map((testimonial) => (
-            <div key={testimonial.id} className="testimonial-card">
-              <div className="rating">
-                {'★'.repeat(testimonial.rating)}{'☆'.repeat(5 - testimonial.rating)}
-              </div>
-              <p className="comment">"{testimonial.comment}"</p>
-              <p className="client-name">— {testimonial.name}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Section 5: Offres Spéciales */}
+      {/* Special Offer */}
       <section className="special-offer">
         <div className="offer-content">
           <h2>Offre Limitée !</h2>
@@ -180,30 +256,49 @@ const Anneaux = () => {
         </div>
       </section>
 
-      {/* Section 6: Personnalisation */}
-      <section className="customization">
-        <h2>Personnalisez Votre Anneau</h2>
-        <div className="customization-preview">
-          <div className="ring-base"></div>
-          <div className="ring-details"></div>
-        </div>
-        <button className="cta-button-outline">Commencer la personnalisation →</button>
-      </section>
-
-      {/* Section 7: FAQ */}
-      <section className="faq">
+      {/* FAQ Section with Toggle */}
+      <section className="faq-section">
         <h2>Questions Fréquentes</h2>
-        <div className="faq-item">
-          <h3>Comment choisir la bonne taille d'anneau ?</h3>
-          <p>Nous proposons un guide des tailles détaillé et un outil de mesure à imprimer.</p>
+        <div className="faq-container">
+          {faqData.map((faq, index) => (
+            <div 
+              key={index} 
+              className={`faq-item ${openFaqIndex === index ? 'open' : ''}`}
+              onClick={() => toggleFaq(index)}
+            >
+              <div className="faq-question">
+                <h3>{faq.question}</h3>
+                {openFaqIndex === index ? <ChevronUp /> : <ChevronDown />}
+              </div>
+              {openFaqIndex === index && (
+                <div className="faq-answer">
+                  <p>{faq.answer}</p>
+                </div>
+              )}
+            </div>
+          ))}
         </div>
-        <div className="faq-item">
-          <h3>Quels sont les matériaux les plus résistants ?</h3>
-          <p>Le platine et le palladium sont les plus durables, tandis que l'or 18 carats offre un bon équilibre.</p>
+      </section>
+      <section className="testimonials">
+        <h2>Ce Que Disent Nos Clients</h2>
+        <div className="testimonials-container">
+          {testimonials.map((testimonial) => (
+            <div key={testimonial.id} className="testimonial-card">
+              <div className="rating">
+                {Array.from({ length: 5 }).map((_, i) => (
+                  <span key={i} className={i < testimonial.rating ? 'star-filled' : 'star-empty'}>
+                    ★
+                  </span>
+                ))}
+              </div>
+              <p className="comment">"{testimonial.comment}"</p>
+              <p className="client-name">— {testimonial.name}</p>
+            </div>
+          ))}
         </div>
       </section>
 
-      {/* Section 8: Newsletter */}
+      {/* Newsletter */}
       <section className="newsletter">
         <h2>Restez Informé</h2>
         <p>Abonnez-vous pour recevoir nos nouveautés et offres exclusives</p>
@@ -215,18 +310,6 @@ const Anneaux = () => {
       </section>
     </div>
   );
-};
-
-// Fonction utilitaire pour la couleur des matériaux
-const getMaterialColor = (material) => {
-  const colors = {
-    gold: '#FFD700',
-    silver: '#C0C0C0',
-    platinum: '#E5E4E2',
-    palladium: '#B4B4B4',
-    'rose-gold': '#E0BFB8'
-  };
-  return colors[material] || '#333';
 };
 
 export default Anneaux;
