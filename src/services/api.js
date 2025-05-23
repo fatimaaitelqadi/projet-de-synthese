@@ -2,22 +2,77 @@ import axios from 'axios';
 
 const API_URL = 'http://127.0.0.1:8000/api';
 
+// Create axios instance with CORS credentials
 const api = axios.create({
     baseURL: API_URL,
     headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json'
-    }
+    },
+    withCredentials: true, // Important for CORS with credentials
+    timeout: 10000 // Add a 10 second timeout to prevent hanging requests
 });
+
+// Add request interceptor for debugging
+api.interceptors.request.use(
+    config => {
+        console.log('API Request:', config.method.toUpperCase(), config.url);
+        return config;
+    },
+    error => {
+        console.error('API Request Error:', error);
+        return Promise.reject(error);
+    }
+);
+
+// Add response interceptor for debugging
+api.interceptors.response.use(
+    response => {
+        console.log('API Response:', response.status, response.statusText);
+        return response;
+    },
+    error => {
+        console.error('API Response Error:', error.response || error);
+        return Promise.reject(error);
+    }
+);
 
 export const productService = {
     getAllProducts: async () => {
         try {
-            const response = await api.get('/produits');
-            return response.data;
+            console.log('Fetching all products from:', `${API_URL}/produits`);
+            
+            // First try to fetch from the API controller
+            try {
+                const response = await api.get('/produits');
+                console.log('Products data received:', response.data);
+                return response.data;
+            } catch (apiError) {
+                // If the first endpoint fails, try the fallback endpoint
+                console.log('Primary endpoint failed, trying fallback endpoint...');
+                const fallbackResponse = await api.get('/products');
+                console.log('Products data received from fallback:', fallbackResponse.data);
+                return fallbackResponse.data;
+            }
         } catch (error) {
             console.error('Error fetching products:', error);
-            throw error;
+            
+            // Provide more detailed error information
+            if (error.response) {
+                // The request was made and the server responded with a status code outside of 2xx
+                console.error('Server responded with error:', {
+                    status: error.response.status,
+                    data: error.response.data
+                });
+            } else if (error.request) {
+                // The request was made but no response was received
+                console.error('No response received from server. Server might be down or CORS issues.');
+            } else {
+                // Something happened in setting up the request
+                console.error('Request setup error:', error.message);
+            }
+            
+            throw new Error('Failed to load products. Please check if the server is running.');
         }
     },
 

@@ -15,27 +15,59 @@ export default function Chains() {
 
   const IMAGE_BASE_URL = 'http://127.0.0.1:8000/storage/';
 
+  // Helper function to get image URL
+  const getImageUrl = (product) => {
+    // First try to use the full URL if available
+    if (product.image_full_url) {
+      return product.image_full_url;
+    }
+    
+    // Fall back to constructing the URL from the image path
+    if (product.image_url || product.image) {
+      const imagePath = product.image_url || product.image;
+      if (!imagePath) return null;
+      
+      // Remove any leading slashes to avoid double slashes in the URL
+      const cleanPath = imagePath.startsWith('/') ? imagePath.substring(1) : imagePath;
+      return `${IMAGE_BASE_URL}${cleanPath}`;
+    }
+    
+    return null;
+  };
+
   useEffect(() => {
     const fetchProduits = async () => {
       try {
         setLoading(true);
+        console.log('Fetching products for Chains category...');
         const productsData = await productService.getAllProducts();
-        console.log('API Response:', productsData);
+        console.log('Raw API Response:', productsData);
 
-        // Filter products for Chains category
-        const filtered = productsData.filter(
-          (p) => p.category === 'Chains' || p.name.includes('Chains')
-        );
+        if (!productsData || !Array.isArray(productsData)) {
+          throw new Error('Invalid data format received from API');
+        }
 
-        // Transform the data to match the expected format
+        // Filter products for Chains category - handle different field names
+        const filtered = productsData.filter(p => {
+          const category = p.category || p.categorie;
+          const name = p.name || p.nom;
+          return category === 'Chains' || 
+                 (name && name.toLowerCase().includes('chains')) ||
+                 (category && category.toLowerCase().includes('chain'));
+        });
+
+        console.log('Filtered products:', filtered);
+
+        // Transform the data to match the expected format, handling different field names
         const transformedProducts = filtered.map(product => ({
           id: product.id,
-          name: product.name,
-          description: product.description,
-          price: parseFloat(product.price),
-          image_url: product.image,
-          category: product.category,
-          stock: product.stock,
+          name: product.name || product.nom || 'Unnamed Product',
+          description: product.description || '',
+          price: parseFloat(product.price || product.prix || 0),
+          image_url: product.image || product.image_url || '',
+          image_full_url: product.image_full_url || null,
+          category: product.category || product.categorie || 'Uncategorized',
+          stock: product.stock || product.stock_quantity || 0,
           rating: product.rating || 4
         }));
 
@@ -76,7 +108,6 @@ export default function Chains() {
 
   return (
     <>
-    
       <div className="boucles-oreilles-container">
         <h2>Chains Collection</h2>
         <div className="product-grid">
@@ -84,13 +115,14 @@ export default function Chains() {
             produits.map((produit) => (
               <div key={produit.id} className="product-card">
                 <div className="product-image-container">
-                  {produit.image_url ? (
+                  {getImageUrl(produit) ? (
                     <Link to={`/product/${produit.id}`} className="product-image-link">
                       <img 
-                        src={`${IMAGE_BASE_URL}${produit.image_url}`} 
+                        src={getImageUrl(produit)} 
                         alt={produit.name} 
                         className="product-image"
                         onError={(e) => {
+                          console.log('Image failed to load:', e.target.src);
                           e.target.onerror = null;
                           e.target.src = '/placeholder-image.jpg';
                         }}

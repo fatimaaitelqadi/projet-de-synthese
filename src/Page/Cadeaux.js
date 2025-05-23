@@ -13,33 +13,74 @@ export default function Cadeaux() {
   const [error, setError] = useState(null);
   const { addToCart } = useCart();
 
-  const IMAGE_BASE_URL = '/';
+  const IMAGE_BASE_URL = 'http://127.0.0.1:8000/storage/';
+
+  // Helper function to get image URL
+  const getImageUrl = (product) => {
+    // First try to use the full URL if available
+    if (product.image_full_url) {
+      return product.image_full_url;
+    }
+    
+    // Fall back to constructing the URL from the image path
+    if (product.image_url || product.image) {
+      const imagePath = product.image_url || product.image;
+      if (!imagePath) return null;
+      
+      // Remove any leading slashes to avoid double slashes in the URL
+      const cleanPath = imagePath.startsWith('/') ? imagePath.substring(1) : imagePath;
+      return `${IMAGE_BASE_URL}${cleanPath}`;
+    }
+    
+    return null;
+  };
 
   useEffect(() => {
     const fetchProduits = async () => {
       try {
         setLoading(true);
-        const productsData = await productService.getAllProducts();
-        console.log('API Response:', productsData);
+        console.log('Fetching products for Cadeaux component...');
+        
+        // Try to get from the cadeaux endpoint first
+        let productsData;
+        try {
+          productsData = await productService.getCadeauProducts();
+          console.log('Cadeau API Response:', productsData);
+        } catch (cadeauError) {
+          console.warn('Failed to fetch from cadeaux endpoint, falling back to all products:', cadeauError);
+          productsData = await productService.getAllProducts();
+          console.log('All Products API Response:', productsData);
+        }
 
-        // Filter products for Gifts category
-        const filtered = productsData.filter(
-          (p) => p.category === 'Cadeaux' || p.name.includes('Cadeau')
-        );
+        if (!productsData || !Array.isArray(productsData)) {
+          throw new Error('Invalid data format received from API');
+        }
+
+        // Filter products for Gifts category - handle different field names
+        const filtered = productsData.filter(p => {
+          const category = p.category || p.categorie;
+          const name = p.name || p.nom;
+          return category === 'Cadeaux' || 
+                 (name && name.toLowerCase().includes('cadeau')) ||
+                 (category && category.toLowerCase().includes('cadeau'));
+        });
+
+        console.log('Filtered Cadeaux products:', filtered);
 
         // Transform the data to match the expected format
         const transformedProducts = filtered.map(product => ({
           id: product.id,
-          name: product.name,
-          description: product.description,
-          price: parseFloat(product.price),
-          image_url: product.image,
-          category: product.category,
-          stock: product.stock,
+          name: product.name || product.nom || 'Unnamed Product',
+          description: product.description || '',
+          price: parseFloat(product.price || product.prix || 0),
+          image_url: product.image || product.image_url || '',
+          image_full_url: product.image_full_url || null,
+          category: product.category || product.categorie || 'Uncategorized',
+          stock: product.stock || product.stock_quantity || 0,
           rating: product.rating || 4
         }));
 
-        console.log('Transformed Products:', transformedProducts);
+        console.log('Transformed Cadeaux Products:', transformedProducts);
         setProduits(transformedProducts);
         setError(null);
       } catch (err) {
@@ -107,13 +148,14 @@ export default function Cadeaux() {
             produits.map((produit) => (
               <div key={produit.id} className="product-card">
                 <div className="product-image-container">
-                  {produit.image_url ? (
+                  {getImageUrl(produit) ? (
                     <Link to={`/product/${produit.id}`} className="product-image-link">
                       <img 
-                        src={`${IMAGE_BASE_URL}${produit.image_url}`} 
+                        src={getImageUrl(produit)} 
                         alt={produit.name} 
                         className="product-image"
                         onError={(e) => {
+                          console.log('Image failed to load:', e.target.src);
                           e.target.onerror = null;
                           e.target.src = '/placeholder-image.jpg';
                         }}
